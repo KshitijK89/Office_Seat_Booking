@@ -5,10 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
-    "start-server": "cd server && nodemon server.js",
-    "start-client": "cd client && npm run dev"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && nodemon app.js",
+    "client": "cd client && npm run dev"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +23,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "vite": "^6.0.11"
   }
 }
