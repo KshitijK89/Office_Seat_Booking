@@ -39,12 +39,12 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    console.log("Stored Hashed Password:", employee.password);
-    console.log("Entered Password:", password);
+    // console.log("Stored Hashed Password:", employee.password);
+    // console.log("Entered Password:", password);
 
     // Compare entered password with hashed password from database
     const isPasswordValid = await bcrypt.compare(password, employee.password);
-    console.log("Is Password Valid?", isPasswordValid);
+    //console.log("Is Password Valid?", isPasswordValid);
 
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid credentials' });

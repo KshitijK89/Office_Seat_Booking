@@ -1,14 +1,17 @@
 import mongoose from 'mongoose';
 
 const seatSchema = new mongoose.Schema({
-  officeId: { 
+  floorId: { 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Office', 
     required: true 
   },
-  seatNumber: {
-    type: Number,
-    required: true
+  floorNumber: { 
+    type: Number, 
+    required: true 
+  },
+  seatNumber: { 
+    type: Number, 
+    required: true 
   },
   status: { 
     type: String, 
@@ -19,6 +22,11 @@ const seatSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Employee' 
   },
+  bookedBy: { 
+    type: mongoose.Schema.Types.ObjectId, // Track who booked this seat
+    ref: 'Employee',
+    required: true 
+  }
 });
 
 export default mongoose.model('Seat', seatSchema);

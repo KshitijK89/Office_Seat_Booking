@@ -7,8 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
-  "start-server": "cd server && nodemon server.js",
-  "start-client": "cd client && npm run dev"
+    "start-server": "cd server && nodemon server.js",
+    "start-client": "cd client && npm run dev"
   },
   "keywords": [],
   "author": "",
