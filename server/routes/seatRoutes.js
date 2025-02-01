@@ -14,6 +14,7 @@ import { protect, adminOnly } from '../middleware/auth.js';
 import {isEmployee, isTeamLeader} from "../middleware/roleCheck.js"
 import {addSeatsSchema,bookSeatSchema,bookSeatsForTeamSchema} from "../validations/authvalidation.js"
 import { validate } from '../middleware/validate.js';
+import { getBookedSeats } from '../controllers/seatController.js';
 const router = express.Router();
 
 // Add seats to an office (Admin-only)
@@ -24,5 +25,7 @@ router.post('/book', validate(bookSeatSchema),protect, isEmployee, bookSeat);
 
 // Book multiple seats (for Team Leaders)
 router.post('/book-team',validate(bookSeatsForTeamSchema), protect, isTeamLeader, bookSeatsForTeam);
+
+router.get('/booked', protect, getBookedSeats);
 
 export default router;

@@ -5,7 +5,7 @@ export const registerSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),
   email: z.string().email({ message: 'Invalid email address' }),
   password: z.string().min(6, { message: 'Password must be at least 6 characters' }),
-  role: z.enum(['Employee', 'Team Leader']).default('Employee'),
+  role: z.enum(['Employee', 'Team Leader', 'Admin']).default('Employee'),
 });
 
 // Schema for login
@@ -16,7 +16,7 @@ export const loginSchema = z.object({
 
 // Schema for adding seats
 export const addSeatsSchema = z.object({
-  officeId: z.string().min(1, { message: 'Office ID is required' }),
+  floorId: z.string().min(1, { message: 'Floor ID is required' }),
   numberOfSeats: z.number().int().positive({ message: 'Number of seats must be a positive integer' }),
 });
 
