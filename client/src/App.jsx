@@ -57,12 +57,12 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route element={<Layout />}>
-          <Route path="/admin" element={
-            <ProtectedRoute role="admin">
+          <Route path="/admin-dashboard" element={
+            <ProtectedRoute role="Admin">
               <AdminDashboard />
             </ProtectedRoute>
           } />
-          <Route path="/dashboard" element={
+          <Route path="/employee-dashboard" element={
             <ProtectedRoute>
               <EmployeeDashboard />
             </ProtectedRoute>
