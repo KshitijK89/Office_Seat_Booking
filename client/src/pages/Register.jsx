@@ -1,7 +1,16 @@
+
+
+
+
+
 // import React, { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import { Building2 } from 'lucide-react';
 // import toast from 'react-hot-toast';
+
+
+// import axios from 'axios';
+
 
 // const Register = () => {
 //   const navigate = useNavigate();
@@ -9,18 +18,49 @@
 //     name: '',
 //     email: '',
 //     password: '',
+
 //     confirmPassword: ''
 //   });
 
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
+
+//     confirmPassword: '',
+//     role: 'employee' // Default role is employee
+//   });
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+
 //     if (formData.password !== formData.confirmPassword) {
 //       toast.error('Passwords do not match');
 //       return;
 //     }
+
 //     // Mock registration - replace with actual registration logic
 //     toast.success('Registration successful! Please login.');
 //     navigate('/');
+
+
+//     try {
+//       const res = await axios.post('http://localhost:5000/api/auth/register', {
+//         name: formData.name,
+//         email: formData.email,
+//         password: formData.password,
+//         role: "Employee", 
+//       });
+
+//       if (res.status === 201) {
+//         toast.success('Registration successful! Please login.');
+//         navigate('/');
+//       }
+//     } catch (error) {
+//       toast.error(error.response?.data?.message || 'Registration failed');
+//       console.log(error);
+      
+//     }
+
 //   };
 
 //   return (
@@ -34,9 +74,13 @@
 //         </h2>
 //         <form onSubmit={handleSubmit} className="space-y-6">
 //           <div>
+
 //             <label className="block text-sm font-medium text-gray-700">
 //               Full Name
 //             </label>
+
+//             <label className="block text-sm font-medium text-gray-700">Full Name</label>
+
 //             <input
 //               type="text"
 //               required
@@ -46,9 +90,13 @@
 //             />
 //           </div>
 //           <div>
+
 //             <label className="block text-sm font-medium text-gray-700">
 //               Email
 //             </label>
+
+//             <label className="block text-sm font-medium text-gray-700">Email</label>
+
 //             <input
 //               type="email"
 //               required
@@ -58,9 +106,13 @@
 //             />
 //           </div>
 //           <div>
+
 //             <label className="block text-sm font-medium text-gray-700">
 //               Password
 //             </label>
+
+//             <label className="block text-sm font-medium text-gray-700">Password</label>
+
 //             <input
 //               type="password"
 //               required
@@ -70,9 +122,13 @@
 //             />
 //           </div>
 //           <div>
+
 //             <label className="block text-sm font-medium text-gray-700">
 //               Confirm Password
 //             </label>
+
+//             <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
+
 //             <input
 //               type="password"
 //               required
@@ -103,6 +159,10 @@
 // };
 
 // export default Register;
+
+
+
+
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
