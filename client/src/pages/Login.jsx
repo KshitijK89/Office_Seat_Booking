@@ -1,8 +1,10 @@
 
+
 // import React, { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import { Building2 } from 'lucide-react';
 // import toast from 'react-hot-toast';
+// import axios from 'axios';
 
 // const Login = () => {
 //   const navigate = useNavigate();
@@ -11,25 +13,34 @@
 //     password: ''
 //   });
 
-//   const handleSubmit = (e) => {
+//   const handleSubmit = async (e) => {
 //     e.preventDefault();
-//     // Mock login - replace with actual authentication
-//     if (formData.email === 'admin@example.com' && formData.password === 'admin123') {
-//       localStorage.setItem('user', JSON.stringify({
-//         name: 'Admin User',
-//         email: formData.email,
-//         role: 'admin'
-//       }));
-//       navigate('/admin');
-//     } else if (formData.email === 'employee@example.com' && formData.password === 'emp123') {
-//       localStorage.setItem('user', JSON.stringify({
-//         name: 'John Doe',
-//         email: formData.email,
-//         role: 'employee'
-//       }));
-//       navigate('/dashboard');
-//     } else {
-//       toast.error('Invalid credentials');
+//     try {
+//       const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+//       const { token } = res.data;
+
+//       // Store token in local storage
+//       localStorage.setItem('token', token);
+
+//       // Decode payload (for role-based navigation)
+//       const payload = JSON.parse(atob(token.split('.')[1])); 
+//       const userRole = payload.role;
+
+//       // Store user details
+//       localStorage.setItem('user', JSON.stringify({ email: formData.email, role: userRole }));
+
+//       toast.success('Login successful!');
+
+//       // Redirect based on role
+//       if (userRole === 'Admin') {
+//         navigate('/admin-dashboard');
+//       } else if (userRole === 'Employee' || userRole === 'Team Leader') {
+//         navigate('/employee-dashboard');
+//       } else {
+//         toast.error('Invalid role detected');
+//       }
+//     } catch (error) {
+//       toast.error(error.response?.data?.message || 'Invalid credentials');
 //     }
 //   };
 
@@ -40,13 +51,11 @@
 //           <Building2 className="h-12 w-12 text-blue-600" />
 //         </div>
 //         <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
-//           Office Seat Planner
+//           Office Seat Planner - Login
 //         </h2>
 //         <form onSubmit={handleSubmit} className="space-y-6">
 //           <div>
-//             <label className="block text-sm font-medium text-gray-700">
-//               Email
-//             </label>
+//             <label className="block text-sm font-medium text-gray-700">Email</label>
 //             <input
 //               type="email"
 //               required
@@ -56,9 +65,7 @@
 //             />
 //           </div>
 //           <div>
-//             <label className="block text-sm font-medium text-gray-700">
-//               Password
-//             </label>
+//             <label className="block text-sm font-medium text-gray-700">Password</label>
 //             <input
 //               type="password"
 //               required
@@ -90,6 +97,7 @@
 
 // export default Login;
 
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Building2 } from 'lucide-react';
@@ -117,15 +125,18 @@ const Login = () => {
       const userRole = payload.role;
 
       // Store user details
-      localStorage.setItem('user', JSON.stringify({ email: formData.email, role: userRole }));
+      const userDetails = { email: formData.email, role: userRole, name: payload.name };
+      localStorage.setItem('user', JSON.stringify(userDetails));
 
       toast.success('Login successful!');
 
       // Redirect based on role
-      if (userRole === 'admin') {
-        navigate('/admin');
+      if (userRole === 'Admin') {
+        navigate('/admin-dashboard');
+      } else if (userRole === 'Employee' || userRole === 'Team Leader') {
+        navigate('/employee-dashboard', { state: { user: userDetails } });
       } else {
-        navigate('/dashboard');
+        toast.error('Invalid role detected');
       }
     } catch (error) {
       toast.error(error.response?.data?.message || 'Invalid credentials');
